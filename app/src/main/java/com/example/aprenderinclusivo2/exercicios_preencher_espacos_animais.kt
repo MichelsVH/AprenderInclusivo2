@@ -1,5 +1,6 @@
 package com.example.aprenderinclusivo2
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -11,44 +12,62 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.aprenderinclusivo2.data.DBExercicios
 import com.example.aprenderinclusivo2.databinding.FragmentExerciciosPreencherEspacosAnimaisBinding
+import kotlinx.coroutines.launch
 
 
 class exercicios_preencher_espacos_animais : Fragment() {
 
     private lateinit var binding: FragmentExerciciosPreencherEspacosAnimaisBinding
-
+    private lateinit var db: DBExercicios
+    private var id =  1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exercicios_preencher_espacos_animais, container, false)
 
-        //val id = 1
-
-        val numeroDeEspacos = 7 // Substitua pelo número desejado
-        val animalName = "aguia" // Substitua pelo nome do animal dinâmico
-        criarCamposParaAnimal(animalName, numeroDeEspacos)
-
-        binding.exerciciosBtnVerificar.setOnClickListener {
-            verificarRespostas(animalName)
-        }
+        db = DBExercicios.getDatabase(requireContext())
+        BuscarAnimal()
 
         return binding.root
     }
 
-    private fun criarCamposParaAnimal(animalName: String, numeroDeEspacos: Int) {
-        val layout = binding.layoutlinear1 // Substitua pelo ID do seu layout
+    private fun BuscarAnimal() {
+        lifecycleScope.launch {
+            val exercicio = db.ExerciciosDao().exerciciosPorID(id)
 
+            exercicio?.let {
+                val numeroDeEspacos = it.numLetras
+                val animalNome = it.nome
+                val animalImagem = it.imagem
+
+                val imageView: ImageView = binding.imageView // Use binding to get the ImageView
+                val imageResourceId = resources.getIdentifier(animalImagem, "drawable", requireContext().packageName)
+                imageView.setImageResource(imageResourceId)
+
+
+                criarCamposParaAnimal(numeroDeEspacos)
+
+                binding.exerciciosBtnVerificar.setOnClickListener {
+                    verificarRespostas(animalNome)
+                }
+            }
+        }
+    }
+    fun criarCamposParaAnimal( numeroDeEspacos: Int) {
+        val layout = binding.layoutlinear1
+        layout.removeAllViews()
         for (i in 0 until numeroDeEspacos) {
             val editText = EditText(requireContext())
             editText.inputType = InputType.TYPE_CLASS_TEXT
-            // Defina outros atributos conforme necessário
             editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(1)) // Limita a uma letra por EditText
             editText.gravity = Gravity.CENTER
             editText.layoutParams = LinearLayout.LayoutParams(
@@ -81,9 +100,10 @@ class exercicios_preencher_espacos_animais : Fragment() {
                 }
             })
 
-            editText.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25f)
+            editText.setTextColor(Color.BLACK)
             layout.addView(editText)
+
         }
     }
 
@@ -97,10 +117,12 @@ class exercicios_preencher_espacos_animais : Fragment() {
         }
 
         if (respostaUsuario.equals(animalName, ignoreCase = true)) {
-            // Resposta correta, forneça feedback positivo
+            // Resposta correta, fornece feedback positivo
             Toast.makeText(requireContext(), "Resposta correta!", Toast.LENGTH_SHORT).show()
+            id++
+            BuscarAnimal()
         } else {
-            // Resposta incorreta, forneça feedback negativo
+            // Resposta incorreta, fornece feedback negativo
             Toast.makeText(requireContext(), "Resposta incorreta!", Toast.LENGTH_SHORT).show()
         }
     }
