@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".menu_exercicios">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/header"
+            android:fontFamily="@font/bouncy_love"
+            android:text="@string/exercicios"
+            android:textAlignment="center"
+            android:textColor="@color/header_text"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <Button
+                android:id="@+id/exercicios_btn_exercicio1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy"
+                android:text="@string/preencher_espacos"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <Button
+                android:id="@+id/exercicios_btn_exercicio2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy"
+                android:text="@string/descobre_palavra"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <Button
+                android:id="@+id/exercicios_btn_exercicio3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy"
+                android:text="@string/corresponder"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp"
+                tools:ignore="VisualLintButtonSize" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_return"
+            android:layout_width="103dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/header"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/icon_return"
+            app:iconSize="60dp"
+            app:iconTint="@color/header_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

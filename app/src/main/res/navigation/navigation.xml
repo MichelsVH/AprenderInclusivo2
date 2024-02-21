@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/menu_inicial">
+
+    <fragment
+        android:id="@+id/menu_inicial"
+        android:name="com.example.aprenderinclusivo2.menu_inicial"
+        android:label="menu_inicial"
+        tools:layout="@layout/fragment_menu_inicial">
+        <action
+            android:id="@+id/action_menu_inicial_to_menu_jogos"
+            app:destination="@id/menu_jogos" />
+        <action
+            android:id="@+id/action_menu_inicial_to_menu_exercicios"
+            app:destination="@id/menu_exercicios" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_jogos"
+        android:name="com.example.aprenderinclusivo2.menu_jogos"
+        android:label="fragment_menu_jogos"
+        tools:layout="@layout/fragment_menu_jogos" >
+        <action
+            android:id="@+id/action_menu_jogos_to_jogos_galo"
+            app:destination="@id/jogos_galo" />
+        <action
+            android:id="@+id/action_menu_jogos_to_jogos_memoria"
+            app:destination="@id/jogos_memoria" />
+        <action
+            android:id="@+id/action_menu_jogos_to_jogos_palavras_cruzadas"
+            app:destination="@id/jogos_palavras_cruzadas" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_exercicios"
+        android:name="com.example.aprenderinclusivo2.menu_exercicios"
+        android:label="menu_exercicios"
+        tools:layout="@layout/fragment_menu_exercicios">
+        <action
+            android:id="@+id/action_menu_exercicios_to_exercicios_preencher_espacos"
+            app:destination="@id/exercicios_preencher_espacos" />
+        <action
+            android:id="@+id/action_menu_exercicios_to_exercicios_corresponder"
+            app:destination="@id/exercicios_corresponder" />
+        <action
+            android:id="@+id/action_menu_exercicios_to_exercicios_descobre_palavra"
+            app:destination="@id/exercicios_descobre_palavra" />
+    </fragment>
+    <action
+        android:id="@+id/return_menu_inicial"
+        app:destination="@id/menu_inicial" />
+    <fragment
+        android:id="@+id/jogos_galo"
+        android:name="com.example.aprenderinclusivo2.jogos_galo"
+        android:label="jogos_galo" />
+    <fragment
+        android:id="@+id/jogos_memoria"
+        android:name="com.example.aprenderinclusivo2.jogos_memoria"
+        android:label="jogos_memoria" />
+    <fragment
+        android:id="@+id/jogos_palavras_cruzadas"
+        android:name="com.example.aprenderinclusivo2.jogos_palavras_cruzadas"
+        android:label="jogos_palavras_cruzadas" />
+    <fragment
+        android:id="@+id/exercicios_corresponder"
+        android:name="com.example.aprenderinclusivo2.exercicios_corresponder"
+        android:label="exercicios_corresponder" />
+    <fragment
+        android:id="@+id/exercicios_descobre_palavra"
+        android:name="com.example.aprenderinclusivo2.exercicios_descobre_palavra"
+        android:label="exercicios_descobre_palavra" />
+    <fragment
+        android:id="@+id/exercicios_preencher_espacos"
+        android:name="com.example.aprenderinclusivo2.exercicios_preencher_espacos"
+        android:label="exercicios_preencher_espacos" >
+        <action
+            android:id="@+id/action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais"
+            app:destination="@id/exercicios_preencher_espacos_animais" />
+    </fragment>
+    <fragment
+        android:id="@+id/exercicios_preencher_espacos_animais"
+        android:name="com.example.aprenderinclusivo2.exercicios_preencher_espacos_animais"
+        android:label="exercicios_preencher_espacos_animais" />
+</navigation>
