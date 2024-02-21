@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="orange">#F6AD72</color>
+    <color name="brown">#763E06</color>
+    <color name="outer_black">#4C5454</color>
+
+<!-- Cores comuns na aplicação -->
+    <color name="header">#763E06</color>
+    <color name="header_text">#FFFFFFFF</color>
+</resources>
+
+
+

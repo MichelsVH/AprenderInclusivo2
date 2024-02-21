@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/header"
+            android:fontFamily="@font/bouncy_love"
+            android:text="@string/Jogos"
+            android:textAlignment="center"
+            android:textColor="@color/header_text"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="680dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <Button
+                android:id="@+id/jogos_btn_jogo1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy_love"
+                android:text="@string/palavras_cruzadas"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp" />
+
+            <Button
+                android:id="@+id/jogos_btn_jogo3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy_love"
+                android:text="@string/jogo_da_memoria"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp" />
+
+            <Button
+                android:id="@+id/jogos_btn_jogo4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy_love"
+                android:text="@string/jogo_do_galo"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_return"
+            android:layout_width="103dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/header"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/icon_return"
+            app:iconSize="60dp"
+            app:iconTint="@color/header_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/header"
+            android:fontFamily="@font/bouncy_love"
+            android:text="@string/preencher_espacos"
+            android:textAlignment="center"
+            android:textColor="@color/header_text"
+            android:textSize="85sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <Button
+                android:id="@+id/exercicios_btn_preencher_espacos_animais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy"
+                android:text="@string/Animais"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <Button
+                android:id="@+id/exercicios_btn_preencher_espacos_frutas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy"
+                android:text="@string/Frutas_Vegetais"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <Button
+                android:id="@+id/exercicios_btn_preencher_espacos_cores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy"
+                android:text="@string/Cores"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <Button
+                android:id="@+id/exercicios_btn_preencher_espacos_bandeiras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/outer_black"
+                android:fontFamily="@font/bouncy"
+                android:text="@string/Bandeiras"
+                android:textColor="@color/orange"
+                android:textSize="60sp"
+                app:cornerRadius="10dp"
+                tools:ignore="VisualLintButtonSize" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
