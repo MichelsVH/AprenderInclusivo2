@@ -42,7 +42,7 @@ class exercicios_preencher_espacos_animais : Fragment() {
 
     private fun BuscarAnimal() {
         lifecycleScope.launch {
-            val exercicio = db.ExerciciosDao().exerciciosPorID(id)
+            val exercicio = db.ExerciciosDao().animaisPorID(id)
 
             exercicio?.let {
                 val numeroDeEspacos = it.numLetras
@@ -54,7 +54,7 @@ class exercicios_preencher_espacos_animais : Fragment() {
                 imageView.setImageResource(imageResourceId)
 
 
-                criarCamposParaAnimal(numeroDeEspacos)
+                criarCampos(numeroDeEspacos)
 
                 binding.exerciciosBtnVerificar.setOnClickListener {
                     verificarRespostas(animalNome)
@@ -62,7 +62,7 @@ class exercicios_preencher_espacos_animais : Fragment() {
             }
         }
     }
-    fun criarCamposParaAnimal( numeroDeEspacos: Int) {
+    fun criarCampos(numeroDeEspacos: Int) {
         val layout = binding.layoutlinear1
         layout.removeAllViews()
         for (i in 0 until numeroDeEspacos) {
