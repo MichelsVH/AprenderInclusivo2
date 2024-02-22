@@ -72,7 +72,7 @@
         android:label="exercicios_descobre_palavra" />
     <fragment
         android:id="@+id/exercicios_preencher_espacos"
-        android:name="com.example.aprenderinclusivo2.exercicios_preencher_espacos"
+        android:name="com.example.aprenderinclusivo2.preencher.exercicios_preencher_espacos"
         android:label="exercicios_preencher_espacos" >
         <action
             android:id="@+id/action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais"
@@ -80,6 +80,6 @@
     </fragment>
     <fragment
         android:id="@+id/exercicios_preencher_espacos_animais"
-        android:name="com.example.aprenderinclusivo2.exercicios_preencher_espacos_animais"
+        android:name="com.example.aprenderinclusivo2.preencher.exercicios_preencher_espacos_animais"
         android:label="exercicios_preencher_espacos_animais" />
 </navigation>

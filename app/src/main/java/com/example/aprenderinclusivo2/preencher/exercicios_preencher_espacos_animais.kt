@@ -1,4 +1,4 @@
-package com.example.aprenderinclusivo2
+package com.example.aprenderinclusivo2.preencher
 
 import android.graphics.Color
 import android.os.Bundle
@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.aprenderinclusivo2.R
 import com.example.aprenderinclusivo2.data.DBExercicios
 import com.example.aprenderinclusivo2.databinding.FragmentExerciciosPreencherEspacosAnimaisBinding
 import kotlinx.coroutines.launch
@@ -32,7 +33,8 @@ class exercicios_preencher_espacos_animais : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exercicios_preencher_espacos_animais, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_exercicios_preencher_espacos_animais, container, false)
 
         db = DBExercicios.getDatabase(requireContext())
         BuscarAnimal()
