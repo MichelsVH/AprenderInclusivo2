@@ -20,6 +20,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.aprenderinclusivo2.R
 import com.example.aprenderinclusivo2.data.DBExercicios
+import com.example.aprenderinclusivo2.data.Exercicios_Animais
+import com.example.aprenderinclusivo2.data.Exercicios_Bandeiras
+import com.example.aprenderinclusivo2.data.Exercicios_Cores
+import com.example.aprenderinclusivo2.data.Exercicios_Vegetais
 import com.example.aprenderinclusivo2.databinding.FragmentExerciciosPreencherEspacosInformacaoBinding
 import kotlinx.coroutines.launch
 
@@ -29,6 +33,7 @@ class exercicios_preencher_espacos_informacao : Fragment() {
     private lateinit var binding: FragmentExerciciosPreencherEspacosInformacaoBinding
     private lateinit var db: DBExercicios
     private var id =  1
+    private var escolha: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,29 +42,66 @@ class exercicios_preencher_espacos_informacao : Fragment() {
             R.layout.fragment_exercicios_preencher_espacos_informacao, container, false)
 
         db = DBExercicios.getDatabase(requireContext())
-        BuscarAnimal()
+
+        escolha = arguments?.getString("escolha")
+
+        BuscarInformacao()
 
         return binding.root
     }
 
-    private fun BuscarAnimal() {
+    private fun BuscarInformacao() {
         lifecycleScope.launch {
-            val exercicio = db.ExerciciosDao().animaisPorID(id)
 
+            Toast.makeText(requireContext(), escolha, Toast.LENGTH_SHORT).show()
+            var exercicio: Any? = null
+            if (escolha == "animais") {
+                exercicio = db.ExerciciosDao().animaisPorID(id)
+            } else if (escolha == "vegetais") {
+                exercicio = db.ExerciciosDao().vegetaisPorID(id)
+            } else if (escolha == "cores") {
+                exercicio = db.ExerciciosDao().coresPorID(id)
+            } else if (escolha == "bandeiras") {
+                exercicio = db.ExerciciosDao().bandeirasPorID(id)
+            }
+              /*
+            when (escolha) {
+                "animais" -> exercicio = db.ExerciciosDao().animaisPorID(id)
+                "vegetais" -> exercicio = db.ExerciciosDao().vegetaisPorID(id)
+                "cores" -> exercicio = db.ExerciciosDao().coresPorID(id)
+                "bandeiras" -> exercicio = db.ExerciciosDao().bandeirasPorID(id)
+            }*/
             exercicio?.let {
-                val numeroDeEspacos = it.numLetras
-                val animalNome = it.nome
-                val animalImagem = it.imagem
+                val numeroDeEspacos = when (it) {
+                    is Exercicios_Animais -> it.numLetras
+                    is Exercicios_Bandeiras -> it.numLetras
+                    is Exercicios_Cores -> it.numLetras
+                    is Exercicios_Vegetais -> it.numLetras
+                    else ->  0
+                }
+                val Nome = when (it) {
+                    is Exercicios_Animais -> it.nome
+                    is Exercicios_Bandeiras -> it.nome
+                    is Exercicios_Cores -> it.nome
+                    is Exercicios_Vegetais -> it.nome
+                    else -> ""
+                }
+                val Imagem = when (it) {
+                    is Exercicios_Animais -> it.imagem
+                    is Exercicios_Bandeiras -> it.imagem
+                    is Exercicios_Cores -> it.imagem
+                    is Exercicios_Vegetais -> it.imagem
+                    else -> ""
+                }
 
                 val imageView: ImageView = binding.imageView // Use binding to get the ImageView
-                val imageResourceId = resources.getIdentifier(animalImagem, "drawable", requireContext().packageName)
+                val imageResourceId = resources.getIdentifier(Imagem, "drawable", requireContext().packageName)
                 imageView.setImageResource(imageResourceId)
-
 
                 criarCampos(numeroDeEspacos)
 
                 binding.exerciciosBtnVerificar.setOnClickListener {
-                    verificarRespostas(animalNome)
+                    verificarRespostas(Nome)
                 }
             }
         }
@@ -122,7 +164,7 @@ class exercicios_preencher_espacos_informacao : Fragment() {
             // Resposta correta, fornece feedback positivo
             Toast.makeText(requireContext(), "Resposta correta!", Toast.LENGTH_SHORT).show()
             id++
-            BuscarAnimal()
+            BuscarInformacao()
         } else {
             // Resposta incorreta, fornece feedback negativo
             Toast.makeText(requireContext(), "Resposta incorreta!", Toast.LENGTH_SHORT).show()
