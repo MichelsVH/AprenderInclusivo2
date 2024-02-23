@@ -20,13 +20,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.aprenderinclusivo2.R
 import com.example.aprenderinclusivo2.data.DBExercicios
-import com.example.aprenderinclusivo2.databinding.FragmentExerciciosPreencherEspacosAnimaisBinding
+import com.example.aprenderinclusivo2.databinding.FragmentExerciciosPreencherEspacosInformacaoBinding
 import kotlinx.coroutines.launch
 
 
-class exercicios_preencher_espacos_animais : Fragment() {
+class exercicios_preencher_espacos_informacao : Fragment() {
 
-    private lateinit var binding: FragmentExerciciosPreencherEspacosAnimaisBinding
+    private lateinit var binding: FragmentExerciciosPreencherEspacosInformacaoBinding
     private lateinit var db: DBExercicios
     private var id =  1
     override fun onCreateView(
@@ -34,7 +34,7 @@ class exercicios_preencher_espacos_animais : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_exercicios_preencher_espacos_animais, container, false)
+            R.layout.fragment_exercicios_preencher_espacos_informacao, container, false)
 
         db = DBExercicios.getDatabase(requireContext())
         BuscarAnimal()

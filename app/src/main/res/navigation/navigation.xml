@@ -76,10 +76,10 @@
         android:label="exercicios_preencher_espacos" >
         <action
             android:id="@+id/action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais"
-            app:destination="@id/exercicios_preencher_espacos_animais" />
+            app:destination="@id/exercicios_preencher_espacos_informacao" />
     </fragment>
     <fragment
-        android:id="@+id/exercicios_preencher_espacos_animais"
-        android:name="com.example.aprenderinclusivo2.preencher.exercicios_preencher_espacos_animais"
+        android:id="@+id/exercicios_preencher_espacos_informacao"
+        android:name="com.example.aprenderinclusivo2.preencher.exercicios_preencher_espacos_informacao"
         android:label="exercicios_preencher_espacos_animais" />
 </navigation>

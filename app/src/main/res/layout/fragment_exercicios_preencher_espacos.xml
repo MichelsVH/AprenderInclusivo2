@@ -43,7 +43,7 @@
                 tools:ignore="VisualLintButtonSize" />
 
             <Button
-                android:id="@+id/exercicios_btn_preencher_espacos_frutas"
+                android:id="@+id/exercicios_btn_preencher_espacos_vegetais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

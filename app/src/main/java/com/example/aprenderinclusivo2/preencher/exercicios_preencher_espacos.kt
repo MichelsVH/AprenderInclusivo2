@@ -23,9 +23,37 @@ class exercicios_preencher_espacos : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_exercicios_preencher_espacos, container, false)
 
-        binding.exerciciosBtnPreencherEspacosAnimais.setOnClickListener{findNavController().navigate(
-            R.id.action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais
-        )}
+        binding.exerciciosBtnPreencherEspacosAnimais.setOnClickListener{
+            val escolha = Bundle().apply{
+                putString("escolha", "animais")
+            }
+            findNavController().navigate(R.id.action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais,
+                escolha)
+        }
+
+        binding.exerciciosBtnPreencherEspacosVegetais.setOnClickListener{
+            val escolha = Bundle().apply{
+                putString("escolha", "vegetais")
+            }
+            findNavController().navigate(R.id.action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais,
+                escolha)
+        }
+
+        binding.exerciciosBtnPreencherEspacosCores.setOnClickListener{
+            val escolha = Bundle().apply{
+                putString("escolha", "cores")
+            }
+            findNavController().navigate(R.id.action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais,
+                escolha)
+        }
+
+        binding.exerciciosBtnPreencherEspacosBandeiras.setOnClickListener{
+            val escolha = Bundle().apply{
+                putString("escolha", "bandeiras")
+            }
+            findNavController().navigate(R.id.action_exercicios_preencher_espacos_to_exercicios_preencher_espacos_animais,
+                escolha)
+        }
 
 
 
