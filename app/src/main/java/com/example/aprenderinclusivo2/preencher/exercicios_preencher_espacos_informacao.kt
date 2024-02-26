@@ -55,22 +55,13 @@ class exercicios_preencher_espacos_informacao : Fragment() {
 
             Toast.makeText(requireContext(), escolha, Toast.LENGTH_SHORT).show()
             var exercicio: Any? = null
-            if (escolha == "animais") {
-                exercicio = db.ExerciciosDao().animaisPorID(id)
-            } else if (escolha == "vegetais") {
-                exercicio = db.ExerciciosDao().vegetaisPorID(id)
-            } else if (escolha == "cores") {
-                exercicio = db.ExerciciosDao().coresPorID(id)
-            } else if (escolha == "bandeiras") {
-                exercicio = db.ExerciciosDao().bandeirasPorID(id)
-            }
-              /*
+
             when (escolha) {
                 "animais" -> exercicio = db.ExerciciosDao().animaisPorID(id)
                 "vegetais" -> exercicio = db.ExerciciosDao().vegetaisPorID(id)
                 "cores" -> exercicio = db.ExerciciosDao().coresPorID(id)
                 "bandeiras" -> exercicio = db.ExerciciosDao().bandeirasPorID(id)
-            }*/
+            }
             exercicio?.let {
                 val numeroDeEspacos = when (it) {
                     is Exercicios_Animais -> it.numLetras
