@@ -54,15 +54,29 @@ class exercicios_preencher_espacos_informacao : Fragment() {
         lifecycleScope.launch {
 
             Toast.makeText(requireContext(), escolha, Toast.LENGTH_SHORT).show()
+
             var exercicio: Any? = null
 
             when (escolha) {
-                "animais" -> exercicio = db.ExerciciosDao().animaisPorID(id)
-                "vegetais" -> exercicio = db.ExerciciosDao().vegetaisPorID(id)
-                "cores" -> exercicio = db.ExerciciosDao().coresPorID(id)
-                "bandeiras" -> exercicio = db.ExerciciosDao().bandeirasPorID(id)
+                "animais" ->{
+                    exercicio = db.ExerciciosDao().animaisPorID(id)
+                    binding.textView3.text = "Animais"
+                }
+                "vegetais" -> {
+                    exercicio = db.ExerciciosDao().vegetaisPorID(id)
+                    binding.textView3.text = "Frutas/Vegetais"
+                }
+                "cores" -> {
+                    exercicio = db.ExerciciosDao().coresPorID(id)
+                    binding.textView3.text = "Cores"
+                }
+                "bandeiras" -> {
+                    exercicio = db.ExerciciosDao().bandeirasPorID(id)
+                    binding.textView3.text = "Bandeiras"
+                }
             }
             exercicio?.let {
+
                 val numeroDeEspacos = when (it) {
                     is Exercicios_Animais -> it.numLetras
                     is Exercicios_Bandeiras -> it.numLetras
@@ -84,6 +98,7 @@ class exercicios_preencher_espacos_informacao : Fragment() {
                     is Exercicios_Vegetais -> it.imagem
                     else -> ""
                 }
+
 
                 val imageView: ImageView = binding.imageView // Use binding to get the ImageView
                 val imageResourceId = resources.getIdentifier(Imagem, "drawable", requireContext().packageName)
