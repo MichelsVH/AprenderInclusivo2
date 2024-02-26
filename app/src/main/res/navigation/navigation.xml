@@ -53,7 +53,11 @@
     <fragment
         android:id="@+id/jogos_galo"
         android:name="com.example.aprenderinclusivo2.jogos_galo"
-        android:label="jogos_galo" />
+        android:label="jogos_galo" >
+        <action
+            android:id="@+id/action_jogos_galo_to_menu_jogos"
+            app:destination="@id/menu_jogos" />
+    </fragment>
     <fragment
         android:id="@+id/jogos_memoria"
         android:name="com.example.aprenderinclusivo2.jogos_memoria"
@@ -81,5 +85,9 @@
     <fragment
         android:id="@+id/exercicios_preencher_espacos_informacao"
         android:name="com.example.aprenderinclusivo2.preencher.exercicios_preencher_espacos_informacao"
-        android:label="exercicios_preencher_espacos_informacao" />
+        android:label="exercicios_preencher_espacos_informacao" >
+        <action
+            android:id="@+id/action_exercicios_preencher_espacos_informacao_to_exercicios_preencher_espacos"
+            app:destination="@id/exercicios_preencher_espacos" />
+    </fragment>
 </navigation>

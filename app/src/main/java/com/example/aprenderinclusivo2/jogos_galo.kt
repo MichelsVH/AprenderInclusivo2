@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.aprenderinclusivo2.databinding.FragmentJogosGaloBinding
 
 
@@ -25,6 +26,14 @@ class jogos_galo : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_jogos_galo, container, false)
+        binding.btnReturn.setOnClickListener{findNavController().navigate(R.id.action_jogos_galo_to_menu_jogos)}
+        binding.btnRestart.setOnClickListener{
+            initBoard()
+            buttons.forEach { it.text = "" }
+            pointsO = 0
+            pointsX = 0
+            updatePointsView()
+        }
         initBoard()
         buttons = listOf(
             binding.button, binding.button2, binding.button3,
@@ -42,7 +51,7 @@ class jogos_galo : Fragment() {
 
     private fun updatePointsView() {
         val pointsTextView = binding.pointsTextView
-        pointsTextView.text = "X=$pointsX O=$pointsO"
+        pointsTextView.text = "X=$pointsX   O=$pointsO"
     }
     private fun setupButtonListeners() {
 
