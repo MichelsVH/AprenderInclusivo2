@@ -2,19 +2,15 @@ package com.example.aprenderinclusivo2
 
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.InputFilter
-import android.text.InputType
-import android.text.TextWatcher
-import android.util.TypedValue
+import android.view.DragEvent
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -48,57 +44,79 @@ class exercicios_descobre_palavra : Fragment() {
         val layout = binding.layoutlinear1
         layout.removeAllViews()
         val numeroDeEspacos = palavra.length
+        val shuffledLetters = palavra.toCharArray().toList().shuffled()
+
+        // Create a mutable list to hold the TextViews
+        val textViews = mutableListOf<TextView>()
+        val originalPositions = mutableMapOf<TextView, Int>()
+
         for (i in 0 until numeroDeEspacos) {
-            val editText = EditText(requireContext())
-            editText.inputType = InputType.TYPE_CLASS_TEXT
-            editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(1)) // Limits to one letter per EditText
-            editText.gravity = Gravity.CENTER
-            editText.layoutParams = LinearLayout.LayoutParams(
+            val textView = TextView(requireContext())
+            textView.text = shuffledLetters[i].toString()
+            textView.textSize = 25f
+            textView.setTextColor(Color.BLACK)
+            textView.gravity = Gravity.CENTER
+            textView.layoutParams = LinearLayout.LayoutParams(
                 0,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 1.0f
             ) // Distributes space equally
 
-            editText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    charSequence: CharSequence,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
+            // Assign a unique tag to each TextView
+            textView.tag = "char-$i"
 
-                override fun onTextChanged(
-                    charSequence: CharSequence,
-                    start: Int,
-                    before: Int,
-                    count: Int
-                ) {
-                }
+            // Set up the drag event listener
+            textView.setOnLongClickListener {
+                val dragShadowBuilder = View.DragShadowBuilder(it)
+                it.startDrag(null, dragShadowBuilder, null, 0)
+                true
+            }
 
-                override fun afterTextChanged(editable: Editable) {
-                    // Additional logic can be added here if necessary
-                }
-            })
-
-            editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25f)
-            editText.setTextColor(Color.BLACK)
-            layout.addView(editText)
+            layout.addView(textView)
+            textViews.add(textView) // Add the TextView to the list
+            originalPositions[textView] = i // Track the original position
         }
-        // Correctly assigns the shuffled letters to the class-level variable
-        val shuffledLetters: List<Char> = palavra.toCharArray().shuffled().toList()
-        for (i in 0 until numeroDeEspacos) {
-            val editText = layout.getChildAt(i) as EditText
-            editText.setText(shuffledLetters[i].toString())
+
+        // Set up the drop event listener on the LinearLayout
+        layout.setOnDragListener { _, event ->
+            when (event.action) {
+                DragEvent.ACTION_DROP -> {
+                    val draggedView = event.localState as TextView
+                    val draggedPosition = originalPositions[draggedView] ?: return@setOnDragListener false
+                    val dropX = event.x.toInt()
+                    val dropY = event.y.toInt()
+
+                    // Determine the closest TextView to the drop point
+                    val closestTextView = textViews.minByOrNull { view ->
+                        val distanceX = view.x - dropX
+                        val distanceY = view.y - dropY
+                        Math.sqrt(distanceX * distanceX + distanceY * distanceY.toDouble())
+                    }
+
+                    // Ensure we found a closest TextView
+                    closestTextView?.let {
+                        // Swap the characters
+                        val tempText = draggedView.text.toString()
+                        draggedView.text = it.text
+                        it.text = tempText
+
+                        // Update the original positions
+                        val dropPosition = originalPositions[it] ?: return@setOnDragListener false
+                        originalPositions[draggedView] = dropPosition
+                        originalPositions[it] = draggedPosition
+                        true
+                    } ?: return@setOnDragListener false
+                }
+                else -> false
+            }
         }
+
         correctWord = palavra
     }
 
 
-    private fun handleLetterClick(button: View) {
-        // Assuming this method is meant for handling button clicks, which doesn't align with the current logic
-        // This method should be adjusted based on the actual UI elements being used
-    }
+
+
 
     private fun checkAnswer() {
         var isAnswerCorrect = true
