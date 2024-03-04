@@ -103,6 +103,7 @@ class jogos_galo : Fragment() {
                 }
                 updatePointsView()
                 showCustomDialog("Jogador $currentPlayer ganhou!")
+                currentPlayer = if (currentPlayer == 'X') 'O' else 'X'
             } else if (checkDraw(board)) {
                 showCustomDialog("É um empate!")
             }
@@ -152,7 +153,6 @@ class jogos_galo : Fragment() {
     }
     fun showCustomDialog(message: String) {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_game_over, null)
-        val dialogTitle = dialogView.findViewById<TextView>(R.id.dialogTitle)
         val dialogMessage = dialogView.findViewById<TextView>(R.id.dialogMessage)
         val dialogButton = dialogView.findViewById<Button>(R.id.dialogButton)
 
@@ -162,6 +162,7 @@ class jogos_galo : Fragment() {
 
         val dialog = AlertDialog.Builder(requireContext())
             .setView(dialogView)
+            .setCancelable(false)
             .create()
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
