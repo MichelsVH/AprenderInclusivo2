@@ -53,7 +53,6 @@ class exercicios_preencher_espacos_informacao : Fragment() {
     private fun BuscarInformacao() {
         lifecycleScope.launch {
 
-            Toast.makeText(requireContext(), escolha, Toast.LENGTH_SHORT).show()
 
             var exercicio: Any? = null
 
