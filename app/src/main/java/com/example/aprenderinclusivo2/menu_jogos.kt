@@ -23,7 +23,7 @@ class menu_jogos : Fragment() {
 
     //Navegação
         //Palavras-cruzadas
-        binding.jogosBtnJogo1.setOnClickListener{findNavController().navigate(R.id.action_menu_jogos_to_jogos_palavras_cruzadas)}
+        binding.jogosBtnJogo1.setOnClickListener{findNavController().navigate(R.id.action_menu_jogos_to_jogos_sopa_letras)}
         //Joga da Memória
         binding.jogosBtnJogo3.setOnClickListener{findNavController().navigate(R.id.action_menu_jogos_to_jogos_memoria)}
         //Jogo do Galo

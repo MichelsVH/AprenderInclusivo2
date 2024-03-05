@@ -29,8 +29,8 @@
             android:id="@+id/action_menu_jogos_to_jogos_memoria"
             app:destination="@id/jogos_memoria" />
         <action
-            android:id="@+id/action_menu_jogos_to_jogos_palavras_cruzadas"
-            app:destination="@id/jogos_palavras_cruzadas" />
+            android:id="@+id/action_menu_jogos_to_jogos_sopa_letras"
+            app:destination="@id/jogos_sopa_letras" />
     </fragment>
     <fragment
         android:id="@+id/menu_exercicios"
@@ -63,9 +63,9 @@
         android:name="com.example.aprenderinclusivo2.jogos_memoria"
         android:label="jogos_memoria" />
     <fragment
-        android:id="@+id/jogos_palavras_cruzadas"
-        android:name="com.example.aprenderinclusivo2.jogos_palavras_cruzadas"
-        android:label="jogos_palavras_cruzadas" />
+        android:id="@+id/jogos_sopa_letras"
+        android:name="com.example.aprenderinclusivo2.jogos_sopa_letras"
+        android:label="jogos_sopa_letras" />
     <fragment
         android:id="@+id/exercicios_corresponder"
         android:name="com.example.aprenderinclusivo2.exercicios_corresponder"

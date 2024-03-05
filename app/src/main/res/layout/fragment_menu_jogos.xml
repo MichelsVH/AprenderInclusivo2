@@ -39,7 +39,7 @@
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/outer_black"
                 android:fontFamily="@font/bouncy_love"
-                android:text="@string/palavras_cruzadas"
+                android:text="@string/sopa_letras"
                 android:textColor="@color/orange"
                 android:textSize="60sp"
                 app:cornerRadius="10dp" />

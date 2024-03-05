@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AprenderInclusivo</string>
     <string name="exercicios">Exercícios</string>
     <string name="Jogos">Jogos</string>
@@ -11,7 +11,7 @@
     <string name="jogo_da_memoria">Jogo da Memória</string>
     <string name="jogo_da_forca">Jogo da Forca</string>
     <string name="jogo_do_galo">Jogo do Galo</string>
-    <string name="palavras_cruzadas">Palavras Cruzadas</string>
+    <string name="sopa_letras">Sopa de Letras</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Animais">Animais</string>
     <string name="Frutas_Vegetais">Frutas/Vegetais</string>
@@ -19,4 +19,9 @@
     <string name="Bandeiras">Bandeiras</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+
 </resources>
