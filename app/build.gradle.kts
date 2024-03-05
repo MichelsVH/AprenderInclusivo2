@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-    implementation("jmedeisis:draglinearlayout:1.1.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -58,5 +57,6 @@ dependencies {
     val roomVersion = "2.6.0"
     implementation ("androidx.room:room-ktx:$roomVersion")
     kapt ("androidx.room:room-compiler:$roomVersion")
+
 
 }

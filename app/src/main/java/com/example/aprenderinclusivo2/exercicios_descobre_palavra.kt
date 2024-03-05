@@ -1,16 +1,17 @@
 package com.example.aprenderinclusivo2
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.DragEvent
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -22,12 +23,13 @@ import com.example.aprenderinclusivo2.data.Exercicios_Vegetais
 import com.example.aprenderinclusivo2.databinding.FragmentExerciciosDescobrePalavraBinding
 import kotlinx.coroutines.launch
 
-class exercicios_descobre_palavra : Fragment() {
+class exercicios_descobre_palavra: Fragment() {
 
     private lateinit var binding: FragmentExerciciosDescobrePalavraBinding
     private lateinit var db: DBExercicios
-    private var shuffledLetters: List<Char>? = null
     private var correctWord: String? = null
+    private var firstSelectedTextView: TextView? = null
+    private var secondSelectedTextView: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,99 +42,93 @@ class exercicios_descobre_palavra : Fragment() {
         return binding.root
     }
 
-    fun criarCampos(palavra: String) {
+
+    private fun criarCampos(palavra: String) {
         val layout = binding.layoutlinear1
         layout.removeAllViews()
-        val numeroDeEspacos = palavra.length
         val shuffledLetters = palavra.toCharArray().toList().shuffled()
-
-        // Create a mutable list to hold the TextViews
-        val textViews = mutableListOf<TextView>()
-        val originalPositions = mutableMapOf<TextView, Int>()
-
-        for (i in 0 until numeroDeEspacos) {
-            val textView = TextView(requireContext())
-            textView.text = shuffledLetters[i].toString()
-            textView.textSize = 25f
-            textView.setTextColor(Color.BLACK)
-            textView.gravity = Gravity.CENTER
-            textView.layoutParams = LinearLayout.LayoutParams(
-                0,
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                1.0f
-            ) // Distributes space equally
-
-            // Assign a unique tag to each TextView
-            textView.tag = "char-$i"
-
-            // Set up the drag event listener
-            textView.setOnLongClickListener {
-                val dragShadowBuilder = View.DragShadowBuilder(it)
-                it.startDrag(null, dragShadowBuilder, null, 0)
-                true
+        firstSelectedTextView = null
+        secondSelectedTextView = null
+        for (i in shuffledLetters.indices) {
+            val textView = TextView(requireContext()).apply {
+                text = shuffledLetters[i].toString()
+                textSize = 25f
+                setTextColor(Color.BLACK)
+                gravity = Gravity.CENTER
+                layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    1.0f
+                )
+                tag = "char-$i"
             }
-
             layout.addView(textView)
-            textViews.add(textView) // Add the TextView to the list
-            originalPositions[textView] = i // Track the original position
-        }
 
-        // Set up the drop event listener on the LinearLayout
-        layout.setOnDragListener { _, event ->
-            when (event.action) {
-                DragEvent.ACTION_DROP -> {
-                    val draggedView = event.localState as TextView
-                    val draggedPosition = originalPositions[draggedView] ?: return@setOnDragListener false
-                    val dropX = event.x.toInt()
-                    val dropY = event.y.toInt()
-
-                    // Determine the closest TextView to the drop point
-                    val closestTextView = textViews.minByOrNull { view ->
-                        val distanceX = view.x - dropX
-                        val distanceY = view.y - dropY
-                        Math.sqrt(distanceX * distanceX + distanceY * distanceY.toDouble())
+            textView.setOnClickListener { view ->
+                if (view.tag == "selected") {
+                    // If the clicked TextView is already selected, attempt to swap it with the previously selected TextView
+                    if (secondSelectedTextView != null) {
+                        swapCharacters()
                     }
-
-                    // Ensure we found a closest TextView
-                    closestTextView?.let {
-                        // Swap the characters
-                        val tempText = draggedView.text.toString()
-                        draggedView.text = it.text
-                        it.text = tempText
-
-                        // Update the original positions
-                        val dropPosition = originalPositions[it] ?: return@setOnDragListener false
-                        originalPositions[draggedView] = dropPosition
-                        originalPositions[it] = draggedPosition
-                        true
-                    } ?: return@setOnDragListener false
+                } else {
+                    // If the clicked TextView is not selected, mark it as selected
+                    selectCharacter(view as TextView)
+                    // Attempt to swap if both TextViews are selected
+                    if (firstSelectedTextView != null && secondSelectedTextView != null) {
+                        swapCharacters()
+                        view.setBackgroundColor(Color.TRANSPARENT)
+                    }
                 }
-                else -> false
+                checkAnswer()
             }
+
         }
 
         correctWord = palavra
     }
 
+    private fun selectCharacter(view: TextView) {
+        if (firstSelectedTextView == null) {
+            firstSelectedTextView = view
+            view.setBackgroundColor(Color.LTGRAY)
+            Log.d("SwapDebug", "First: ${view.text}")
+        } else if (secondSelectedTextView == null) {
+            secondSelectedTextView = view
+            view.setBackgroundColor(Color.LTGRAY)
+            Log.d("SwapDebug", "Second: ${view.text}")
+        }
+    }
 
+    private fun swapCharacters() {
+        if (firstSelectedTextView != null && secondSelectedTextView != null) {
+            val tempText = firstSelectedTextView!!.text.toString()
+            firstSelectedTextView!!.text = secondSelectedTextView!!.text
+            secondSelectedTextView!!.text = tempText
+
+            // Remove the background color from the selected TextViews
+            firstSelectedTextView!!.setBackgroundColor(Color.TRANSPARENT)
+            secondSelectedTextView!!.setBackgroundColor(Color.TRANSPARENT)
+            
+            // Reset the selected TextViews
+            firstSelectedTextView = null
+            secondSelectedTextView = null
+        }
+    }
 
 
 
     private fun checkAnswer() {
-        var isAnswerCorrect = true
         correctWord?.let { word ->
-            for (i in 0 until word.length) {
-                val editText = binding.layoutlinear1.getChildAt(i) as EditText
-                if (editText.text.isEmpty() || editText.text.toString() != word[i].toString()) {
-                    isAnswerCorrect = false
-                    break
+            if (word.length == binding.layoutlinear1.childCount) {
+                val isAnswerCorrect = (0 until word.length).all { i ->
+                    val textView = binding.layoutlinear1.getChildAt(i) as TextView
+                    textView.text.toString() == word[i].toString()
+                }
+                if (isAnswerCorrect) {
+                    Log.d("Condition", "Resposta correta")
+                    showCustomDialog()
                 }
             }
-        }
-
-        if (isAnswerCorrect) {
-            // Handle correct answer (e.g., show success message, move to next exercise)
-            // You can also add logic for offering rewards or increasing difficulty
         }
     }
 
@@ -142,6 +138,7 @@ class exercicios_descobre_palavra : Fragment() {
             exercicio?.let { displayExercicio(it) }
         }
     }
+
 
     private suspend fun fetchRandomExercicio(): Any? {
         val categorias = listOf("animais", "vegetais", "cores", "bandeiras")
@@ -177,8 +174,29 @@ class exercicios_descobre_palavra : Fragment() {
     }
 
     private fun setImageResource(imagem: String) {
-        val imageView: ImageView = binding.imageView
         val imageResourceId = resources.getIdentifier(imagem, "drawable", requireContext().packageName)
-        imageView.setImageResource(imageResourceId)
+        binding.imageView.setImageResource(imageResourceId)
+    }
+
+    fun showCustomDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_win, null)
+        val dialogButton = dialogView.findViewById<Button>(R.id.dialogButton)
+
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setCancelable(false)
+            .create()
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        dialogButton.setOnClickListener {
+            // Reset the game state and UI.
+            BuscarInformacao()
+            // Dismiss the dialog
+            dialog.dismiss()
+        }
+
     }
 }
+
