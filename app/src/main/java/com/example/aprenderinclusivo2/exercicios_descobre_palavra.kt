@@ -136,6 +136,7 @@ class exercicios_descobre_palavra: Fragment() {
         lifecycleScope.launch {
             val exercicio = fetchRandomExercicio()
             exercicio?.let { displayExercicio(it) }
+
         }
     }
 

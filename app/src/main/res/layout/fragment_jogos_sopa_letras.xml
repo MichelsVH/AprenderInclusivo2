@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:background="@color/header"
             android:fontFamily="@font/bouncy_love"
-            android:text="@string/palavras_cruzadas"
+            android:text="@string/sopa_letras"
             android:textAlignment="center"
             android:textColor="@color/header_text"
             android:textSize="85sp" />

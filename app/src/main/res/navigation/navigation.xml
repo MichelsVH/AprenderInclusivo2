@@ -64,7 +64,7 @@
         android:label="jogos_memoria" />
     <fragment
         android:id="@+id/jogos_sopa_letras"
-        android:name="com.example.aprenderinclusivo2.jogos_sopa_letras"
+        android:name="com.example.aprenderinclusivo2.sopa_letras.jogos_sopa_letras"
         android:label="jogos_sopa_letras" />
     <fragment
         android:id="@+id/exercicios_corresponder"

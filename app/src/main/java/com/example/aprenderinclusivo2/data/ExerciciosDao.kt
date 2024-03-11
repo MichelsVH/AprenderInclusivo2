@@ -24,4 +24,5 @@ interface ExerciciosDao {
     @Query("SELECT * FROM exercicios_vegetais")
     suspend fun vegetaisTotal(): List<Exercicios_Vegetais>
 
+
 }
