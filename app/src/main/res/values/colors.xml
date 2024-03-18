@@ -9,6 +9,16 @@
 <!-- Cores comuns na aplicação -->
     <color name="header">#763E06</color>
     <color name="header_text">#FFFFFFFF</color>
+
+    <!-- Cores apenas para as cartas do jogo da memoria -->
+    <color name="cor1">#FFFF00</color>
+    <color name="cor2">#FF7F00</color>
+    <color name="cor3">#FF0000</color>
+    <color name="cor4">#00FF00</color>
+    <color name="cor5">#008080</color>
+    <color name="cor6">#A020F0</color>
+    <color name="cor7">#0000FF</color>
+    <color name="cor8">#787878</color>
 </resources>
 
 

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Exercicios_Animais::class, Exercicios_Bandeiras::class, Exercicios_Cores::class, Exercicios_Vegetais::class],
+    entities = [Exercicios_Animais::class, Exercicios_Bandeiras::class, Exercicios_Cores::class, Exercicios_Vegetais::class, Jogo_Memoria::class],
     version = 1,
     exportSchema = false
 )

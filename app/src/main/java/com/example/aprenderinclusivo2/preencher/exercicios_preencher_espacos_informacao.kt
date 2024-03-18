@@ -1,5 +1,6 @@
 package com.example.aprenderinclusivo2.preencher
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -25,6 +26,7 @@ import com.example.aprenderinclusivo2.data.Exercicios_Bandeiras
 import com.example.aprenderinclusivo2.data.Exercicios_Cores
 import com.example.aprenderinclusivo2.data.Exercicios_Vegetais
 import com.example.aprenderinclusivo2.databinding.FragmentExerciciosPreencherEspacosInformacaoBinding
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import kotlinx.coroutines.launch
 
 
@@ -34,6 +36,7 @@ class exercicios_preencher_espacos_informacao : Fragment() {
     private lateinit var db: DBExercicios
     private var id =  1
     private var escolha: String? = null
+    private val Nome :String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -144,8 +147,19 @@ class exercicios_preencher_espacos_informacao : Fragment() {
                 ) {
                 }
 
+                @SuppressLint("RestrictedApi")
                 override fun afterTextChanged(editable: Editable) {
-                    // Aqui você pode adicionar lógica adicional se necessário
+                    if (editText.text.length == 1) {
+                        // Find the next EditText and request focus on it
+                        val nextEditTextIndex = layout.indexOfChild(editText) + 1
+                        if (nextEditTextIndex < layout.childCount) {
+                            val nextEditText = layout.getChildAt(nextEditTextIndex) as EditText
+                            nextEditText.requestFocus()
+                        }else{
+                            editText.clearFocus()
+                            hideKeyboard(editText)
+                        }
+                    }
                 }
             })
 

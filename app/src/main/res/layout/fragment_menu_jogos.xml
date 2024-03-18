@@ -33,18 +33,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             <Button
-                android:id="@+id/jogos_btn_jogo1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:backgroundTint="@color/outer_black"
-                android:fontFamily="@font/bouncy_love"
-                android:text="@string/sopa_letras"
-                android:textColor="@color/orange"
-                android:textSize="60sp"
-                app:cornerRadius="10dp" />
-
-            <Button
                 android:id="@+id/jogos_btn_jogo3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

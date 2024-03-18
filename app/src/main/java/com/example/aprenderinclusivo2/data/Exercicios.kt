@@ -39,3 +39,10 @@ data class Exercicios_Vegetais(
     val numLetras: Int,
     val imagem: String
 )
+@Entity(tableName = "jogo_memoria")
+data class Jogo_Memoria(
+
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val imagem: String
+)

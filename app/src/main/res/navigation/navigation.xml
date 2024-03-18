@@ -61,11 +61,19 @@
     <fragment
         android:id="@+id/jogos_memoria"
         android:name="com.example.aprenderinclusivo2.jogos_memoria"
-        android:label="jogos_memoria" />
+        android:label="jogos_memoria" >
+        <action
+            android:id="@+id/action_jogos_memoria_to_menu_jogos"
+            app:destination="@id/menu_jogos" />
+    </fragment>
     <fragment
         android:id="@+id/jogos_sopa_letras"
         android:name="com.example.aprenderinclusivo2.sopa_letras.jogos_sopa_letras"
-        android:label="jogos_sopa_letras" />
+        android:label="jogos_sopa_letras" >
+        <action
+            android:id="@+id/action_jogos_sopa_letras_to_menu_jogos"
+            app:destination="@id/menu_jogos" />
+    </fragment>
     <fragment
         android:id="@+id/exercicios_corresponder"
         android:name="com.example.aprenderinclusivo2.exercicios_corresponder"
